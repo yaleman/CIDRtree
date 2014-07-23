@@ -12,12 +12,9 @@ def getfile( filename ):
 	""" gets the contents of a file, returns False if it doesn't exist or isn't actually a file """
 	if( os.path.exists( filename ) ):
 		if( os.path.isfile( filename ) ):
-			try:
-				fh = open( filename, 'r' )
-				return fh.read()
-			except:
-				# TODO: deal with unable to open file errors etc
-				print( "Error?" )
+			fh = open( filename, 'r' )
+			return fh.read()
+			# TODO: deal with unable to open file errors etc
 	return False
 
 def test_getfile():
