@@ -30,7 +30,8 @@ class CIDR:
 		""" feed it a CIDR x.x.x.x/y and it'll do things. """
 		if not CIDRVALIDATE.match( CIDRstring ):
 			# TODO: deal with this properly
-			log( "{} isn't a valid CIDR?" )
+			log( "{} isn't a valid CIDR?".format( CIDRstring ) )
 			return False
 
 test = CIDR( "10.0.0.4/8" )
+test = CIDR( "10.0.0.0" )
