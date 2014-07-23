@@ -21,9 +21,18 @@ def test_getfile():
 	""" Testing getfile() """
 	assert getfile( "./testdata/singlevalidCIDR.txt" ), "10.0.0.0/24"
 
-def csvprocess( csvstring ):
-	""" deals with a csv string """
-	return False
+def fileprocess( filestring ):
+	""" deals with a file full of host definitions """
+	filestring = cleanfile( filestring )
+	lines = filestring.split( "\n" )
+	data = []
+	for line in lines:
+		site, net = line.split()
+		data.append( ( site.strip(), net.strip() ) )
+	return data
+
+def test_csvprocess():
+	assert fileprocess( "site 	 10.0.0.0/24"), [ ("site", "10.0.0.0/24" ) ]
 
 def cleanfile( filestring ):
 	""" cleans not-allowed details, may return a report """
