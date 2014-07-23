@@ -18,8 +18,8 @@ def getfile( filename ):
 	return False
 
 def test_getfile():
+	""" Testing getfile() """
 	assert getfile( "./testdata/singlevalidCIDR.txt" ), "10.0.0.0/24"
-	assert getfile( "./testdata/" ), False
 
 def csvprocess( csvstring ):
 	""" deals with a csv string """
