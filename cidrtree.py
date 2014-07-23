@@ -35,6 +35,7 @@ class CIDR:
 			self.address = tmp.group( 1 )
 			self.mask = tmp.group( 2 )
 			tmp = False
+			self.children = []
 
 test = CIDR( "10.0.0.4/8" )
 try:
