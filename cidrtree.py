@@ -8,6 +8,17 @@ import os
 
 CIDRVALIDATE = compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
 
+def test_cidrvalidate():
+	""" testing the CIDRVALIDATE regex. """
+	teststring = "192.1.2.234/32"
+	ts_test = CIDRVALIDATE.match( teststring )
+	assert ts_test.group( 0 ) == "192.1.2.234/32"
+	assert ts_test.group( 1 ) == "192.1.2.234"
+	assert ts_test.group( 2 ) == "32"
+	teststring = "2.3.4.5"
+	ts_test = CIDRVALIDATE.match( teststring )
+	assert ts_test == None
+
 def getfile( filename ):
 	""" gets the contents of a file, returns False if it doesn't exist or isn't actually a file """
 	if( os.path.exists( filename ) ):
