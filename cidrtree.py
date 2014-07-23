@@ -5,6 +5,8 @@
 
 from re import compile
 
+CIDRVALIDATE = compile( "^[\d]{1,3}.[\d]{1,3}.[\d]{1,3}.[\d]{1,3}/[\d]{1,2}$" )
+
 def getfile( filename ):
 	""" gets the contents of a file """
 	return False
@@ -16,8 +18,6 @@ def csvprocess( csvstring ):
 def cleanfile( filestring ):
 	""" cleans not-allowed details, may return a report """
 	return False
-
-CIDRVALIDATE = compile( "^[\d]{1,3}.[\d]{1,3}.[\d]{1,3}.[\d]{1,3}/[\d]{1,2}$" )
 
 def log( logstring ):
 	""" log something, currently goes to console """
