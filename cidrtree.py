@@ -19,11 +19,17 @@ def cleanfile( filestring ):
 
 CIDRVALIDATE = re.compile( "^[\d]{1,3}.[\d]{1,3}.[\d]{1,3}.[\d]{1,3}/[\d]{1,2}$" )
 
+def log( logstring ):
+	""" log something, currently goes to console """
+	print( "[ERROR] {}".format( logstring )
+	return True
+
 class CIDR( object ):
 	""" CIDR definition """
 
 	def init( self, CIDRstring ):
 		""" feed it a CIDR x.x.x.x/y and it'll do things. """
 		if not CIDRVALIDATE.match( CIDRstring ):
-			
+			# TODO: deal with this properly
+			log( "{} isn't a valid CIDR?" )
 			return False
