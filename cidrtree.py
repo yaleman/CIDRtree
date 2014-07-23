@@ -4,12 +4,26 @@
 """
 
 from re import compile
+import os
 
 CIDRVALIDATE = compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
 
 def getfile( filename ):
-	""" gets the contents of a file """
+	""" gets the contents of a file, returns False if it doesn't exist or isn't actually a file """
+	if( os.path.exists( filename ) ):
+		if( os.path.isfile( filename ) ):
+			try:
+				fh = open( filename, 'r' )
+				return fh.read()
+			except:
+				# TODO: deal with unable to open file errors etc
+				print( "Error?" )
 	return False
+
+def test_getfile():
+	test_data = [ ( "./testdata/singlevalidCIDR.txt", "10.0.0.0/24" ), ( "./testdata/", TypeError ) ]
+	for f, d in test_data:
+		assert getfile( f ), d
 
 def csvprocess( csvstring ):
 	""" deals with a csv string """
