@@ -33,3 +33,5 @@ class CIDR( object ):
 			# TODO: deal with this properly
 			log( "{} isn't a valid CIDR?" )
 			return False
+
+test = CIDR( "10.0.0.4/8" )
