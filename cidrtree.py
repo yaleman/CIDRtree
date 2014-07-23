@@ -21,7 +21,7 @@ CIDRVALIDATE = compile( "^[\d]{1,3}.[\d]{1,3}.[\d]{1,3}.[\d]{1,3}/[\d]{1,2}$" )
 
 def log( logstring ):
 	""" log something, currently goes to console """
-	print( "[ERROR] {}".format( logstring ) )
+	print( "{}".format( logstring ) )
 	return True
 
 class CIDR:
