@@ -31,7 +31,7 @@ def fileprocess( filestring ):
 		data.append( ( site.strip(), net.strip() ) )
 	return data
 
-def test_csvprocess():
+def test_fileprocess():
 	assert fileprocess( "site 	 10.0.0.0/24"), [ ("site", "10.0.0.0/24" ) ]
 
 def cleanfile( filestring ):
