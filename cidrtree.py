@@ -27,7 +27,12 @@ def csvprocess( csvstring ):
 
 def cleanfile( filestring ):
 	""" cleans not-allowed details, may return a report """
-	return False
+	# replace tabs with spaces
+	filestring.replace( "\t", " " )
+	# replace doublespaces
+	while "  " in filestring:
+		filestring.replace( "  ", " " )
+	return filestring
 
 def log( logstring ):
 	""" log something, currently goes to console """
