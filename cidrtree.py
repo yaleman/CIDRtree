@@ -5,7 +5,7 @@
 
 from re import compile
 
-CIDRVALIDATE = compile( "^[\d]{1,3}.[\d]{1,3}.[\d]{1,3}.[\d]{1,3}/[\d]{1,2}$" )
+CIDRVALIDATE = compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
 
 def getfile( filename ):
 	""" gets the contents of a file """
@@ -31,7 +31,10 @@ class CIDR:
 		if not CIDRVALIDATE.match( CIDRstring ):
 			raise TypeError( "{} isn't a valid CIDR?".format( CIDRstring ) )
 		else:
-			
+			tmp = CIDRVALIDATE.match( CIDRstring )
+			self.address = tmp.group( 1 )
+			self.mask = tmp.group( 2 )
+			tmp = False
 
 test = CIDR( "10.0.0.4/8" )
 try:
