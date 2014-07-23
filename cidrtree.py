@@ -18,9 +18,8 @@ def getfile( filename ):
 	return False
 
 def test_getfile():
-	test_data = [ ( "./testdata/singlevalidCIDR.txt", "10.0.0.0/24" ), ( "./testdata/", TypeError ) ]
-	for f, d in test_data:
-		assert getfile( f ), d
+	assert getfile( "./testdata/singlevalidCIDR.txt" ), "10.0.0.0/24"
+	assert getfile( "./testdata/" ), False
 
 def csvprocess( csvstring ):
 	""" deals with a csv string """
