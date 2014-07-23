@@ -29,9 +29,12 @@ class CIDR:
 	def __init__( self, CIDRstring ):
 		""" feed it a CIDR x.x.x.x/y and it'll do things. """
 		if not CIDRVALIDATE.match( CIDRstring ):
-			# TODO: deal with this properly
-			log( "{} isn't a valid CIDR?".format( CIDRstring ) )
-			return False
+			raise TypeError( "{} isn't a valid CIDR?".format( CIDRstring ) )
+		else:
+			
 
 test = CIDR( "10.0.0.4/8" )
-test = CIDR( "10.0.0.0" )
+try:
+	test = CIDR( "10.0.0.0" )
+except TypeError:
+	log( "Testing: This should error, as it's not a valid CIDR" )
