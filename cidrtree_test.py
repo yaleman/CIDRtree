@@ -36,8 +36,7 @@ def test_CIDR_bitmaskchecker():
 	""" Testing bitmask validation of CIDR class """
 	nose.tools.assert_raises( TypeError, CIDR, "10.0.0.0/35", "test" )
 
-
-def test_getters():
+def test_CIDR_getters():
 	""" Testing CIDR get-functions """
 	tmp = CIDR( "10.0.0.8/8", "butts" )
 	assert tmp.getname(), "butts"
