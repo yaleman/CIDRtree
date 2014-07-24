@@ -41,7 +41,7 @@ def fileprocess( filestring ):
 	for line in lines:
 		if( line.strip() != "" ):		# ignore empty lines
 			site, net = line.split()
-			data.append( ( site.strip(), net.strip() ) )
+			data.append( ( net.strip(), site.strip() ) )
 	return data
 
 def makecidrs( cleanfile ):
