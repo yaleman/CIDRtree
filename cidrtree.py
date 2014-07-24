@@ -50,6 +50,7 @@ def log( logstring ):
 	print( "{}".format( logstring ) )
 	return True
 
+
 class CIDR:
 	""" CIDR definition """
 	def __init__( self, CIDRstring, name ):
