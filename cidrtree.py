@@ -41,6 +41,8 @@ def fileprocess( filestring ):
 			data.append( ( site.strip(), net.strip() ) )
 	return data
 
+def makecidrs( cleanfile ):
+	None
 
 
 def log( logstring ):
