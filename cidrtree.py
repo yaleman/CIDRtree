@@ -54,12 +54,17 @@ class CIDR:
 		if not CIDRVALIDATE.match( CIDRstring ):
 			raise TypeError( "{} isn't a valid CIDR?".format( CIDRstring ) )
 		else:
+			# break down the CIDR
 			tmp = CIDRVALIDATE.match( CIDRstring )
 			self.address = tmp.group( 1 )
 			self.mask = tmp.group( 2 )
 			tmp = False
-			self.children = []
-			self.files = []
+
+			self.children = []			# store children
+			self.files = []				# store where this object was found
+
+	def __str__( self ):
+		return "{}/{}".format( self.address, self.mask)
 
 if __name__ == "__main__":
 	print( "Hello user" )

@@ -19,7 +19,10 @@ def test_fileprocess():
 	""" Testing fileprocess() """
 	assert fileprocess( "site 	 10.0.0.0/24"), [ ("site", "10.0.0.0/24" ) ]
 
-#test = CIDR( "10.0.0.4/8" )
+def test_CIDR_stringret():
+	""" Testing the string return for the CIDR class """
+	tmp = CIDR( "10.0.0.8/8" )
+	assert str( tmp ), "10.0.0.8/8"
 
 try:
 	test = CIDR( "10.0.0.0" )
