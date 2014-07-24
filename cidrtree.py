@@ -5,6 +5,7 @@
 
 from re import compile
 import os
+import sys
 
 CIDRVALIDATE = compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
 
@@ -25,18 +26,20 @@ def fileprocess( filestring ):
 	lines = filestring.split( "\n" )
 	data = []
 	for line in lines:
-		site, net = line.split()
-		data.append( ( site.strip(), net.strip() ) )
+		if( line.strip() != "" ):		# ignore empty lines
+			site, net = line.split()
+			data.append( ( site.strip(), net.strip() ) )
 	return data
 
 
 def cleanfile( filestring ):
 	""" cleans not-allowed details, may return a report """
 	# replace tabs with spaces
-	filestring.replace( "\t", " " )
+	filestring = filestring.replace( "\t", " " )
+	filestring = filestring.replace( "\r\n", "\n" )
 	# replace doublespaces
 	while "  " in filestring:
-		filestring.replace( "  ", " " )
+		filestring = filestring.replace( "  ", " " )
 	return filestring
 
 def log( logstring ):
@@ -56,3 +59,9 @@ class CIDR:
 			self.mask = tmp.group( 2 )
 			tmp = False
 			self.children = []
+if __name__ == "__main__":
+	print( "Hello user" )
+
+	if len( sys.argv ) > 1:
+		# There's files.
+		files = sys.argv[1:]
