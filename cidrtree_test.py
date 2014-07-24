@@ -24,4 +24,4 @@ def test_fileprocess():
 try:
 	test = CIDR( "10.0.0.0" )
 except TypeError:
-	assert False
+	pass
