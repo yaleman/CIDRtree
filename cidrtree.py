@@ -58,7 +58,7 @@ class CIDR:
 			# break down the CIDR
 			tmp = CIDRVALIDATE.match( CIDRstring )
 			self.address = tmp.group( 1 )
-			self.mask = tmp.group( 2 )
+			self.mask = int( tmp.group( 2 ) )
 			tmp = False
 
 			self.name = name
