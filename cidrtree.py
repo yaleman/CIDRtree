@@ -45,10 +45,10 @@ def fileprocess( filestring ):
 	return data
 
 def makecidrs( cleanfile ):
+	""" takes the output from fileprocess() and returns a list of CIDR objects """
 	cidrs = []
 	for entry in cleanfile:
 		net, name = entry
-		#net = CIDRVALIDATE.match( net ).groups()
 		cidrs.append( CIDR( net, name ) )
 	return cidrs
 
