@@ -67,6 +67,15 @@ class CIDR:
 	def __str__( self ):
 		return "{} {}/{}".format( self.name, self.address, self.mask)
 
+	def getmask( self ):
+		return self.mask
+
+	def getaddress( self ):
+		return self.address
+
+	def getname( self ):
+		return self.name
+
 if __name__ == "__main__":
 	print( "Hello user" )
 
