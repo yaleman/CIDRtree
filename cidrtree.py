@@ -21,7 +21,8 @@ def getfile( filename ):
 
 
 def fileprocess( filestring ):
-	""" deals with a file full of host definitions """
+	""" deals with a file full of host definitions,
+		turns it to an array full of tuples of name/CIDR """
 	filestring = cleanfile( filestring )
 	lines = filestring.split( "\n" )
 	data = []
