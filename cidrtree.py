@@ -67,3 +67,11 @@ if __name__ == "__main__":
 	if len( sys.argv ) > 1:
 		# There's files.
 		files = sys.argv[1:]
+		openfiles = []
+		for filename in files:
+			filecontents = getfile( filename )
+			if( filecontents != False ):
+				filecontents =  cleanfile( filecontents )
+				filecontents = fileprocess( filecontents )
+				openfiles.append( ( filename, filecontents ) )
+		print openfiles
