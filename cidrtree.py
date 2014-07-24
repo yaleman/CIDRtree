@@ -56,9 +56,3 @@ class CIDR:
 			self.mask = tmp.group( 2 )
 			tmp = False
 			self.children = []
-
-test = CIDR( "10.0.0.4/8" )
-try:
-	test = CIDR( "10.0.0.0" )
-except TypeError:
-	log( "Testing: This should error, as it's not a valid CIDR" )

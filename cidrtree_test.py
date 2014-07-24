@@ -18,3 +18,10 @@ def test_getfile():
 def test_fileprocess():
 	""" Testing fileprocess() """
 	assert fileprocess( "site 	 10.0.0.0/24"), [ ("site", "10.0.0.0/24" ) ]
+
+#test = CIDR( "10.0.0.4/8" )
+
+try:
+	test = CIDR( "10.0.0.0" )
+except TypeError:
+	assert False
