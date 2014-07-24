@@ -49,7 +49,7 @@ def log( logstring ):
 
 class CIDR:
 	""" CIDR definition """
-	def __init__( self, CIDRstring ):
+	def __init__( self, CIDRstring, name ):
 		""" feed it a CIDR x.x.x.x/y and it'll do things. """
 		if not CIDRVALIDATE.match( CIDRstring ):
 			raise TypeError( "{} isn't a valid CIDR?".format( CIDRstring ) )
@@ -60,11 +60,12 @@ class CIDR:
 			self.mask = tmp.group( 2 )
 			tmp = False
 
+			self.name = name
 			self.children = []			# store children
 			self.files = []				# store where this object was found
 
 	def __str__( self ):
-		return "{}/{}".format( self.address, self.mask)
+		return "{} {}/{}".format( self.name, self.address, self.mask)
 
 if __name__ == "__main__":
 	print( "Hello user" )

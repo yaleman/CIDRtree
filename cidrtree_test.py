@@ -21,8 +21,8 @@ def test_fileprocess():
 
 def test_CIDR_stringret():
 	""" Testing the string return for the CIDR class """
-	tmp = CIDR( "10.0.0.8/8" )
-	assert str( tmp ), "10.0.0.8/8"
+	tmp = CIDR( "10.0.0.8/8", "butts" )
+	assert str( tmp ), "butts 10.0.0.8/8"
 
 try:
 	test = CIDR( "10.0.0.0" )
