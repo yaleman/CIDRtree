@@ -24,6 +24,13 @@ def test_CIDR_stringret():
 	tmp = CIDR( "10.0.0.8/8", "butts" )
 	assert str( tmp ), "butts 10.0.0.8/8"
 
+def test_getters():
+	""" Testing CIDR get-functions """
+	tmp = CIDR( "10.0.0.8/8", "butts" )
+	assert tmp.getname(), "butts"
+	assert tmp.getaddress(), "10.0.0.8"
+	assert tmp.getmask(), 8
+
 try:
 	test = CIDR( "10.0.0.0" )
 except TypeError:
