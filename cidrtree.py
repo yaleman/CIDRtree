@@ -59,6 +59,8 @@ class CIDR:
 			self.mask = tmp.group( 2 )
 			tmp = False
 			self.children = []
+			self.files = []
+
 if __name__ == "__main__":
 	print( "Hello user" )
 
