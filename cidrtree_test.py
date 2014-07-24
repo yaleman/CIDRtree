@@ -20,6 +20,10 @@ def test_fileprocess():
 	""" Testing fileprocess() """
 	assert fileprocess( "site 	 10.0.0.0/24"), [ ("site", "10.0.0.0/24" ) ]
 
+def test_makecidrs():
+	""" Testing makecidrs() """
+	assert makecidrs( [("butts", "10.0.0.0/9")] ) == False
+
 def test_CIDR_stringret():
 	""" Testing the string return for the CIDR class """
 	assert str( CIDR( "10.0.0.8/8", "butts" ) ), "butts 10.0.0.8/8"
