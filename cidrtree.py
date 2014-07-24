@@ -19,6 +19,15 @@ def getfile( filename ):
 			# TODO: deal with unable to open file errors etc
 	return False
 
+def cleanfile( filestring ):
+	""" cleans not-allowed details, may return a report """
+	# replace tabs with spaces
+	filestring = filestring.replace( "\t", " " )
+	filestring = filestring.replace( "\r\n", "\n" )
+	# replace doublespaces
+	while "  " in filestring:
+		filestring = filestring.replace( "  ", " " )
+	return filestring
 
 def fileprocess( filestring ):
 	""" deals with a file full of host definitions,
@@ -33,15 +42,6 @@ def fileprocess( filestring ):
 	return data
 
 
-def cleanfile( filestring ):
-	""" cleans not-allowed details, may return a report """
-	# replace tabs with spaces
-	filestring = filestring.replace( "\t", " " )
-	filestring = filestring.replace( "\r\n", "\n" )
-	# replace doublespaces
-	while "  " in filestring:
-		filestring = filestring.replace( "  ", " " )
-	return filestring
 
 def log( logstring ):
 	""" log something, currently goes to console """
