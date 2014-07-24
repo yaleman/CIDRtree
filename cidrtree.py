@@ -8,16 +8,6 @@ import os
 
 CIDRVALIDATE = compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
 
-def test_cidrvalidate():
-	""" testing the CIDRVALIDATE regex. """
-	teststring = "192.1.2.234/32"
-	ts_test = CIDRVALIDATE.match( teststring )
-	assert ts_test.group( 0 ) == "192.1.2.234/32"
-	assert ts_test.group( 1 ) == "192.1.2.234"
-	assert ts_test.group( 2 ) == "32"
-	teststring = "2.3.4.5"
-	ts_test = CIDRVALIDATE.match( teststring )
-	assert ts_test == None
 
 def getfile( filename ):
 	""" gets the contents of a file, returns False if it doesn't exist or isn't actually a file """
@@ -28,9 +18,6 @@ def getfile( filename ):
 			# TODO: deal with unable to open file errors etc
 	return False
 
-def test_getfile():
-	""" Testing getfile() """
-	assert getfile( "./testdata/singlevalidCIDR.txt" ), "10.0.0.0/24"
 
 def fileprocess( filestring ):
 	""" deals with a file full of host definitions """
@@ -42,8 +29,6 @@ def fileprocess( filestring ):
 		data.append( ( site.strip(), net.strip() ) )
 	return data
 
-def test_fileprocess():
-	assert fileprocess( "site 	 10.0.0.0/24"), [ ("site", "10.0.0.0/24" ) ]
 
 def cleanfile( filestring ):
 	""" cleans not-allowed details, may return a report """
