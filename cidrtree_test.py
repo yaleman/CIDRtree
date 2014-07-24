@@ -18,11 +18,11 @@ def test_getfile():
 
 def test_fileprocess():
 	""" Testing fileprocess() """
-	assert fileprocess( "site 	 10.0.0.0/24"), [ ("site", "10.0.0.0/24" ) ]
+	assert fileprocess( "site 	 10.0.0.0/24"), [ ( "10.0.0.0/24", "site" ) ]
 
 def test_makecidrs():
 	""" Testing makecidrs() """
-	assert makecidrs( [("butts", "10.0.0.0/9")] ) == False
+	assert makecidrs( [("10.0.0.0/9", "butts" )] ), [].append( CIDR( "10.0.0.0/9", "butts" ) )
 
 def test_CIDR_stringret():
 	""" Testing the string return for the CIDR class """

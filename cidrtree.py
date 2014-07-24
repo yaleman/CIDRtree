@@ -45,8 +45,12 @@ def fileprocess( filestring ):
 	return data
 
 def makecidrs( cleanfile ):
-	None
-
+	cidrs = []
+	for entry in cleanfile:
+		net, name = entry
+		#net = CIDRVALIDATE.match( net ).groups()
+		cidrs.append( CIDR( net, name ) )
+	return cidrs
 
 def log( logstring ):
 	""" log something, currently goes to console """
