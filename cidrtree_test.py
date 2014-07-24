@@ -1,3 +1,4 @@
+import nose
 from cidrtree import *
 
 def test_cidrvalidate():
@@ -21,8 +22,16 @@ def test_fileprocess():
 
 def test_CIDR_stringret():
 	""" Testing the string return for the CIDR class """
-	tmp = CIDR( "10.0.0.8/8", "butts" )
-	assert str( tmp ), "butts 10.0.0.8/8"
+	assert str( CIDR( "10.0.0.8/8", "butts" ) ), "butts 10.0.0.8/8"
+
+def test_CIDR_regex():
+	""" Testing the CIDR regex """
+	nose.tools.assert_raises( TypeError, CIDR, "10.0.0.0", 'test' )
+
+def test_CIDR_bitmaskchecker():
+	""" Testing bitmask validation of CIDR class """
+	nose.tools.assert_raises( TypeError, CIDR, "10.0.0.0/35", "test" )
+
 
 def test_getters():
 	""" Testing CIDR get-functions """
@@ -30,8 +39,3 @@ def test_getters():
 	assert tmp.getname(), "butts"
 	assert tmp.getaddress(), "10.0.0.8"
 	assert tmp.getmask(), 8
-
-try:
-	test = CIDR( "10.0.0.0" )
-except TypeError:
-	pass
