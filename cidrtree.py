@@ -70,7 +70,12 @@ class CIDR:
 if __name__ == "__main__":
 	print( "Hello user" )
 
-	if len( sys.argv ) > 1:
+	numargs = len( sys.argv )
+	if( numargs == 1 ):
+		print "Usage string should be here"
+	elif len( sys.argv ) > 2:
+		print "Too many arguments, one file at a time bucko!"
+	else:
 		# There's files.
 		files = sys.argv[1:]
 		openfiles = []
