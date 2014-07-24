@@ -62,7 +62,6 @@ class CIDR:
 
 			self.name = name
 			self.children = []			# store children
-			self.files = []				# store where this object was found
 
 	def __str__( self ):
 		return "{} {}/{}".format( self.name, self.address, self.mask)
