@@ -8,15 +8,12 @@ CIDRVALIDATE = re.compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1
 
 def getfile( filename ):
 	""" gets the contents of a file, returns False if it doesn't exist or isn't actually a file """
-	if( os.path.exists( filename ) ):
-		if( os.path.isfile( filename ) ):
-			# TODO: deal with unable to open file errors etc
-			fh = open( filename, 'r' )
-			return fh.read()
-		else:
-			return False
+	if( os.path.exists( filename ) and os.path.isfile( filename ) ):
+		# TODO: deal with unable to open file errors etc
+		fh = open( filename, 'r' )
+		return fh.read()
 	else:
-		return False
+		return None
 
 def cleanfile( filestring ):
 	""" cleans not-allowed details, may return a report """
@@ -47,11 +44,6 @@ def makecidrs( cleanfile ):
 		net, name = entry
 		cidrs.append( CIDR( net, name ) )
 	return cidrs
-
-def log( logstring ):
-	""" log something, currently goes to console """
-	print( "{}".format( logstring ) )
-	return True
 
 class CIDR:
 	""" CIDR definition """

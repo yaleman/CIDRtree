@@ -3,7 +3,6 @@
 """ takes some flat files with host group definitions and does things. this description will get better!
 """
 
-
 import os
 import sys
 
