@@ -64,3 +64,8 @@ def test_CIDR_cancontain():
 	assert tmp1.cancontain( tmp3 ) == True  # should fit
 	assert tmp3.cancontain( tmp1 ) == False # tmp1 is a bigger network
 	assert tmp3.cancontain( tmp2 ) == False # mask matches, network doesn't
+
+def test_CIDR_binary_address():
+	""" Testing CIDR binary_address """
+	tmp = CIDR( "10.0.0.0/8", 'test' )
+	assert tmp.binary_address().bin == "00001010000000000000000000000000"

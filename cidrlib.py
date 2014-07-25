@@ -75,12 +75,14 @@ class CIDR:
 		return self.address
 
 	def getname( self ):
+		""" returns the string name of the CIDR """
 		return self.name
 
 	def cancontain( self, cidrclass ):
-		if( cidrclass.getmask() < self.mask ):
-			# smaller mask, that's a start
-			return True
+		if( cidrclass.getmask() > self.mask ): # smaller mask, that's a start
+			if( ( cidrclass.binary_address() & self.binary_netmask() ) == self.binary_address() ):
+				return True
+		return False
 
 	def iptoint( self, address ):
 		""" takes an ip address in string form and turns it to an integer
@@ -91,5 +93,10 @@ class CIDR:
 		intval = ( int( a ) * ( 256 ** 3 ) ) + ( int( b ) * ( 256 ** 2 ) ) + ( int( c ) * 256 ) + int( d )
 		return int( intval )
 
-	def binary_netmask( self, reset=False ):
+	def binary_netmask( self ):
+		""" returns a 32-bit binary representation of the netmask """
 		return BitArray( bin=( "1" * self.mask) + ( ( 32 - self.mask ) * "0" ) )
+
+	def binary_address( self ):
+		""" returns a 32-bit binary representation of the address """
+		return BitArray( uint=self.iptoint( self.address ), length=32 )
