@@ -69,9 +69,11 @@ class CIDR:
 		return "{} {}/{}".format( self.name, self.address, self.mask)
 
 	def getmask( self ):
+		""" returns the CIDR mask, it's an int """
 		return self.mask
 
 	def getaddress( self ):
+		""" returns the address, a string """
 		return self.address
 
 	def getname( self ):
@@ -79,8 +81,9 @@ class CIDR:
 		return self.name
 
 	def cancontain( self, cidrclass ):
+		""" checks if a given CIDR object can be contained within this one """
 		if( cidrclass.getmask() > self.mask ): # smaller mask, that's a start
-			if( ( cidrclass.binary_address() & self.binary_netmask() ) == self.binary_address() ):
+			if( ( cidrclass.binaryaddress() & self.binarynetmask() ) == self.binaryaddress() ):
 				return True
 		return False
 
@@ -93,10 +96,14 @@ class CIDR:
 		intval = ( int( a ) * ( 256 ** 3 ) ) + ( int( b ) * ( 256 ** 2 ) ) + ( int( c ) * 256 ) + int( d )
 		return int( intval )
 
-	def binary_netmask( self ):
+	def binarynetmask( self ):
 		""" returns a 32-bit binary representation of the netmask """
 		return BitArray( bin=( "1" * self.mask) + ( ( 32 - self.mask ) * "0" ) )
 
-	def binary_address( self ):
+	def binaryaddress( self ):
 		""" returns a 32-bit binary representation of the address """
 		return BitArray( uint=self.iptoint( self.address ), length=32 )
+
+	def haschildren( self ):
+		""" checks if this CIDR has children """
+		return len( self.children ) > 0

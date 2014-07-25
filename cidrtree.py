@@ -23,11 +23,11 @@ def main():
 		files = sys.argv[1:]
 		openfiles = []
 		for filename in files:
-			filecontents = getfile( filename )
-			if( filecontents != False ):
-				filecontents =  cleanfile( filecontents )
-				filecontents = fileprocess( filecontents )
-				openfiles.append( ( filename, filecontents ) )
+			filecontents = getfile( filename ) # open the file
+			if( filecontents.strip() != False ):
+				filecontents =  cleanfile( filecontents ) # clean it up
+				filecontents = fileprocess( filecontents ) # process it into tuples
+				openfiles.append( ( filename, filecontents ) ) # dump it into a list of files
 		print openfiles
 		return 0
 
