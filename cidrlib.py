@@ -2,6 +2,8 @@
 import re
 import os, sys
 
+from bitstring import BitArray, BitStream, Bits
+
 
 CIDRVALIDATE = re.compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
 
@@ -74,3 +76,22 @@ class CIDR:
 
 	def getname( self ):
 		return self.name
+
+	def cancontain( self, address, mask ):
+		if( mask < self.mask ):
+			# smaller mask, that's a start
+			return True
+
+	def iptoint( self, address ):
+		""" takes an ip address in string form and turns it to an integer
+		pass str( address )
+		returns false if it's an invalid string
+		"""
+		a,b,c,d = address.split( "." )
+		intval = ( int( a ) * ( 256 ** 3 ) ) + ( int( b ) * ( 256 ** 2 ) ) + ( int( c ) * 256 ) + int( d )
+		print( "{} {} {}".format( address, intval, type( intval ) ) )
+		return int( intval )
+
+	def binary_netmask( self, reset=False ):
+		netmask_string = ( "1" * self.mask) + ( ( 32 - self.mask ) * "0" )
+		return BitArray( bin=netmask_string )

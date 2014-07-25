@@ -39,6 +39,13 @@ def test_CIDR_bitmaskchecker():
 def test_CIDR_getters():
 	""" Testing CIDR get-functions """
 	tmp = CIDR( "10.0.0.8/8", "butts" )
-	assert tmp.getname(), "butts"
-	assert tmp.getaddress(), "10.0.0.8"
-	assert tmp.getmask(), 8
+	assert tmp.getname() == "butts"
+	assert tmp.getaddress() == "10.0.0.8"
+	assert tmp.getmask() == 8
+
+def test_CIDR_iptoint():
+	""" Testing CIDR iptoint """
+	tmp = CIDR( "1.2.3.4/2", 'test' )
+	assert tmp.iptoint( "192.168.0.2" ) == 3232235522
+	assert tmp.iptoint( "0.0.0.0" ) == 0
+	assert tmp.iptoint( "10.2.3.4" ) == 167904004
