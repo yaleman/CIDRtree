@@ -53,6 +53,7 @@ def test_CIDR_iptoint():
 def test_CIDR_binary_netmask():
 	""" Testing CIDR binary_netmask """
 	assert CIDR( "1.2.3.4/2", 'test' ).binary_netmask().bin == "11000000000000000000000000000000"
+	assert CIDR( "1.2.3.4/32", 'test' ).binary_netmask().bin == "11111111111111111111111111111111"
 
 def test_CIDR_cancontain():
 	""" Testing CIDR cancontain """
