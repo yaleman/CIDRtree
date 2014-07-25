@@ -89,7 +89,6 @@ class CIDR:
 		"""
 		a,b,c,d = address.split( "." )
 		intval = ( int( a ) * ( 256 ** 3 ) ) + ( int( b ) * ( 256 ** 2 ) ) + ( int( c ) * 256 ) + int( d )
-		print( "{} {} {}".format( address, intval, type( intval ) ) )
 		return int( intval )
 
 	def binary_netmask( self, reset=False ):
