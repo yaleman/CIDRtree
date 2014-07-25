@@ -53,3 +53,13 @@ def test_CIDR_iptoint():
 def test_CIDR_binary_netmask():
 	""" Testing CIDR binary_netmask """
 	assert CIDR( "1.2.3.4/2", 'test' ).binary_netmask().bin == "11000000000000000000000000000000"
+
+def test_CIDR_cancontain():
+	""" Testing CIDR cancontain """
+	tmp1 = CIDR( "10.0.0.0/8", "foo8" )
+	tmp2 = CIDR( "192.168.0.0/16", "foo16" )
+	tmp3 = CIDR( "10.0.1.0/24", "foo24")
+	assert tmp1.cancontain( tmp2 ) == False # tighter mask, wrong network
+	assert tmp1.cancontain( tmp3 ) == True  # should fit
+	assert tmp3.cancontain( tmp1 ) == False # tmp1 is a bigger network
+	assert tmp3.cancontain( tmp2 ) == False # mask matches, network doesn't
