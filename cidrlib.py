@@ -77,8 +77,8 @@ class CIDR:
 	def getname( self ):
 		return self.name
 
-	def cancontain( self, address, mask ):
-		if( mask < self.mask ):
+	def cancontain( self, cidrclass ):
+		if( cidrclass.getmask() < self.mask ):
 			# smaller mask, that's a start
 			return True
 
