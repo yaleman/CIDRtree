@@ -69,3 +69,10 @@ def test_CIDR_binary_address():
 	""" Testing CIDR binary_address """
 	tmp = CIDR( "10.0.0.0/8", 'test' )
 	assert tmp.binaryaddress().bin == "00001010000000000000000000000000"
+
+def test_CIDR_addchild():
+	""" Testing CIDR addchild """
+	tmp1 = CIDR( "10.0.0.0/8", 'test' )
+	tmp2 = CIDR( "10.0.0.0/24", 'test' )
+	assert tmp1.addchild( tmp2 ) == True # test valid
+	nose.tools.assert_raises( TypeError, tmp2.addchild, tmp1 ) # Doesn't fit

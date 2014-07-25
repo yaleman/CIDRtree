@@ -80,13 +80,6 @@ class CIDR:
 		""" returns the string name of the CIDR """
 		return self.name
 
-	def cancontain( self, cidrclass ):
-		""" checks if a given CIDR object can be contained within this one """
-		if( cidrclass.getmask() > self.mask ): # smaller mask, that's a start
-			if( ( cidrclass.binaryaddress() & self.binarynetmask() ) == self.binaryaddress() ):
-				return True
-		return False
-
 	def iptoint( self, address ):
 		""" takes an ip address in string form and turns it to an integer
 		pass str( address )
@@ -107,3 +100,23 @@ class CIDR:
 	def haschildren( self ):
 		""" checks if this CIDR has children """
 		return len( self.children ) > 0
+
+	def cancontain( self, cidrclass ):
+		""" checks if a given CIDR object can be contained within this one """
+		if( cidrclass.getmask() > self.mask ): # smaller mask, that's a start
+			if( ( cidrclass.binaryaddress() & self.binarynetmask() ) == self.binaryaddress() ):
+				return True
+		return False
+
+	def addchild( self, cidrclass ):
+		""" adds a given CIDR object as a child, but checks children to see if it's
+		 better placed lower on the tree """
+		if( self.cancontain( cidrclass ) ):
+			if( self.haschildren() ):
+				# check if the children can contain it
+				None
+			else:
+				self.children.append( cidrclass )
+				return True
+		else:
+			raise TypeError( "Child {} doesn't fit in {}".format( str( cidrclass ), str( self ) ) )
