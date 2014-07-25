@@ -1,5 +1,5 @@
 import nose
-from cidrtree import *
+from cidrlib import *
 
 def test_cidrvalidate():
 	""" Testing the CIDRVALIDATE regex. """
