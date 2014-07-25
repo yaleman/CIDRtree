@@ -93,5 +93,4 @@ class CIDR:
 		return int( intval )
 
 	def binary_netmask( self, reset=False ):
-		netmask_string = ( "1" * self.mask) + ( ( 32 - self.mask ) * "0" )
-		return BitArray( bin=netmask_string )
+		return BitArray( bin=( "1" * self.mask) + ( ( 32 - self.mask ) * "0" ) )
