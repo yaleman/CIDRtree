@@ -113,10 +113,12 @@ class CIDR:
 		 better placed lower on the tree """
 		if( self.cancontain( cidrclass ) ):
 			if( self.haschildren() ):
-				# check if the children can contain it
-				None
-			else:
-				self.children.append( cidrclass )
-				return True
+				# TODO: recursively check if the children can contain it
+				for child in self.children:
+					if child.cancontain( cidrclass ):
+						if child.addchild( cidrclass ) == True:
+							return True	# break out of loop
+			self.children.append( cidrclass ) # falls through to adding as a child
+			return True
 		else:
 			raise TypeError( "Child {} doesn't fit in {}".format( str( cidrclass ), str( self ) ) )
