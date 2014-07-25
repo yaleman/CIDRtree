@@ -49,3 +49,7 @@ def test_CIDR_iptoint():
 	assert tmp.iptoint( "192.168.0.2" ) == 3232235522
 	assert tmp.iptoint( "0.0.0.0" ) == 0
 	assert tmp.iptoint( "10.2.3.4" ) == 167904004
+
+def test_CIDR_binary_netmask():
+	""" Testing CIDR binary_netmask """
+	assert CIDR( "1.2.3.4/2", 'test' ).binary_netmask().bin == "11000000000000000000000000000000"
