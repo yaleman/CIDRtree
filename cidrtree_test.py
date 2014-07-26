@@ -14,15 +14,15 @@ def test_cidrvalidate():
 
 def test_getfile():
 	""" Testing getfile() """
-	assert getfile( "./testdata/singlevalidCIDR.txt" ), "10.0.0.0/24"
+	assert getfile( "./testdata/singlevalidCIDR.txt" ) == "10.0.0.0/24"
 
 def test_fileprocess():
 	""" Testing fileprocess() """
-	assert fileprocess( "site 	 10.0.0.0/24"), [ ( "10.0.0.0/24", "site" ) ]
+	assert fileprocess( "site 	 10.0.0.0/24") == [ ( "10.0.0.0", 24,  "site" ) ]
 
 def test_makecidrs():
 	""" Testing makecidrs() """
-	assert makecidrs( [("10.0.0.0/9", "butts" )] ), [].append( CIDR( "10.0.0.0/9", "butts" ) )
+	assert makecidrs( [ ("10.0.0.0", 9, "butts" ) ] ) == [].append( CIDR( "10.0.0.0/9", "butts" ) )
 
 def test_CIDR_stringret():
 	""" Testing the string return for the CIDR class """
@@ -31,6 +31,7 @@ def test_CIDR_stringret():
 def test_CIDR_regex():
 	""" Testing the CIDR regex """
 	nose.tools.assert_raises( TypeError, CIDR, "10.0.0.0", 'test' )
+	assert str( CIDR( "10.0.0.0/8", "test" ) ) == "test 10.0.0.0/8"
 
 def test_CIDR_bitmaskchecker():
 	""" Testing bitmask validation of CIDR class """

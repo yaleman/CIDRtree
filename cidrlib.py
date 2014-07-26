@@ -13,7 +13,7 @@ def getfile( filename ):
 	if( os.path.exists( filename ) and os.path.isfile( filename ) ):
 		# TODO: deal with unable to open file errors etc
 		fh = open( filename, 'r' )
-		return fh.read()
+		return fh.read().strip()
 	else:
 		return None
 
@@ -36,14 +36,16 @@ def fileprocess( filestring ):
 	for line in lines:
 		if( line.strip() != "" ):		# ignore empty lines
 			site, net = line.split()
-			data.append( ( net.strip(), site.strip() ) )
+			net, mask = net.split( '/' )
+			data.append( ( net.strip(), int( mask ), site.strip() ) )
 	return data
 
 def makecidrs( cleanfile ):
 	""" takes the output from fileprocess() and returns a list of CIDR objects """
 	cidrs = []
 	for entry in cleanfile:
-		net, name = entry
+		net, mask, name = entry
+		net = "{}/{}".format( net, mask )
 		cidrs.append( CIDR( net, name ) )
 	return cidrs
 
