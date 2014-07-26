@@ -110,15 +110,15 @@ class CIDR:
 
 	def addchild( self, cidrclass ):
 		""" adds a given CIDR object as a child, but checks children to see if it's
-		 better placed lower on the tree """
-		if( self.cancontain( cidrclass ) ):
-			if( self.haschildren() ):
-				# TODO: recursively check if the children can contain it
+		 better placed lower on the tree
+		returns True if successful, False if not """
+		if( self.cancontain( cidrclass ) ): 					# check if it's possible to fit
+			if( self.haschildren() ):							# check if can be placed lower
 				for child in self.children:
-					if child.cancontain( cidrclass ):
-						if child.addchild( cidrclass ) == True:
-							return True	# break out of loop
-			self.children.append( cidrclass ) # falls through to adding as a child
+					if child.addchild( cidrclass ) == True:		# it's recursive!
+						return True								# break out of loop
+			self.children.append( cidrclass ) 					# falls through to adding as a child
 			return True
 		else:
-			raise TypeError( "Child {} doesn't fit in {}".format( str( cidrclass ), str( self ) ) )
+			#raise TypeError( "Child {} doesn't fit in {}".format( str( cidrclass ), str( self ) ) )
+			return False

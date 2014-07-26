@@ -77,4 +77,7 @@ def test_CIDR_addchild():
 	tmp3 = CIDR( "10.0.0.0/24", 'test' )
 	assert tmp1.addchild( tmp2 ) == True # test valid
 	assert tmp1.addchild( tmp3 ) == True # test valid
-	nose.tools.assert_raises( TypeError, tmp2.addchild, tmp1 ) # Doesn't fit
+	assert tmp1.addchild( tmp2 ) == True
+	assert tmp2.addchild( tmp1 ) == False  # Doesn't fit
+	assert tmp3.addchild( tmp1 ) == False
+	assert tmp2.addchild( tmp1 ) == False
