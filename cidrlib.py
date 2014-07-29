@@ -2,7 +2,7 @@
 import re
 import os, sys
 
-from bitstring import  ConstBitStream
+from bitstring import Bits
 
 
 CIDRVALIDATE = re.compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
@@ -92,11 +92,11 @@ class CIDR:
 
 	def binarynetmask( self ):
 		""" returns a 32-bit binary representation of the netmask """
-		return ConstBitStream( bin=( "1" * self.mask) + ( ( 32 - self.mask ) * "0" ) )
+		return Bits( bin=( "1" * self.mask) + ( ( 32 - self.mask ) * "0" ) )
 
 	def binaryaddress( self ):
 		""" returns a 32-bit binary representation of the address """
-		return ConstBitStream( uint=self.iptoint( self.address ), length=32 )
+		return Bits( uint=self.iptoint( self.address ), length=32 )
 
 	def haschildren( self ):
 		""" checks if this CIDR has children """
