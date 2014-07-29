@@ -2,7 +2,7 @@
 import re
 import os, sys
 
-from bitstring import Bits
+from bitstring import Bits # https://pythonhosted.org/bitstring/creation.html
 
 
 CIDRVALIDATE = re.compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
