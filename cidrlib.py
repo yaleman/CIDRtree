@@ -45,8 +45,7 @@ def makecidrs( cleanfile ):
 	cidrs = []
 	for entry in cleanfile:
 		net, mask, name = entry
-		net = "{}/{}".format( net, mask )
-		cidrs.append( CIDR( net, name ) )
+		cidrs.append( CIDR( "{}/{}".format( net, mask ), name ) )
 	return cidrs
 
 class CIDR:

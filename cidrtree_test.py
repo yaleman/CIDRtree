@@ -22,7 +22,10 @@ def test_fileprocess():
 
 def test_makecidrs():
 	""" Testing makecidrs() """
-	assert makecidrs( [ ("10.0.0.0", 9, "butts" ) ] ) == [].append( CIDR( "10.0.0.0/9", "butts" ) )
+	test1 = makecidrs( [ ("10.0.0.0", 9, "butts" ) ] )
+	test2 = []
+	test2.append( CIDR( "10.0.0.0/9", "butts" ) )
+	assert [ str( t ) for t in test1 ] == [ str( t ) for t in test2 ]
 
 def test_CIDR_stringret():
 	""" Testing the string return for the CIDR class """
