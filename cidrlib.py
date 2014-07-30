@@ -60,8 +60,8 @@ class CIDR:
 		else:
 			# break down the CIDR
 			tmp = CIDRVALIDATE.match( CIDRstring )
-			self.address = tmp.group( 1 )
-			self.mask = int( tmp.group( 2 ) )
+			self.address = tmp.group( 1 ) # TODO: this needs to be private and have a setter function)
+			self.mask = int( tmp.group( 2 ) ) # TODO: this needs to be private and have a setter function)
 			if self.mask >32 or self.mask < 0:
 				raise TypeError( "Bitmask is wrong: '{}'".format( str( self.mask ) ) )
 			tmp = False
