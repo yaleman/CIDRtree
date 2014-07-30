@@ -6,7 +6,7 @@
 import os
 import sys
 
-from cidrlib import *
+from cidrlib import CIDR, CIDRfile, CIDRVALIDATE
 
 
 def main():

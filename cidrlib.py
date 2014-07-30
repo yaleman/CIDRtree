@@ -7,46 +7,49 @@ from bitstring import Bits # https://pythonhosted.org/bitstring/creation.html
 
 CIDRVALIDATE = re.compile( "^(?P<address>[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})\/(?P<mask>[\d]{1,2})$" )
 
+class CIDRfile:
+	def __init__( self, filename ):
+		self.filecontents = self.getfile( filename )
 
-def getfile( filename ):
-	""" gets the contents of a file, returns False if it doesn't exist or isn't actually a file """
-	if( os.path.exists( filename ) and os.path.isfile( filename ) ):
-		# TODO: deal with unable to open file errors etc
-		fh = open( filename, 'r' )
-		return fh.read().strip()
-	else:
-		return None
+	def getfile( self, filename ):
+		""" gets the contents of a file, returns False if it doesn't exist or isn't actually a file """
+		if( os.path.exists( filename ) and os.path.isfile( filename ) ):
+			# TODO: deal with unable to open file errors etc
+			fh = open( filename, 'r' )
+			return fh.read().strip()
+		else:
+			return None
 
-def cleanfile( filestring ):
-	""" cleans not-allowed details, may return a report """
-	filestring = filestring.replace( "\r\n", "\n" )
+	def cleanfile( self, filestring ):
+		""" cleans not-allowed details, may return a report """
+		filestring = filestring.replace( "\r\n", "\n" )
 
-	#TODO: replace the below with a regex for whitespace
-	filestring = filestring.replace( "\t", " " ) 		# replace tabs with spaces
-	while "  " in filestring: 							# replace doublespaces
-		filestring = filestring.replace( "  ", " " )
-	return filestring
+		#TODO: replace the below with a regex for whitespace
+		filestring = filestring.replace( "\t", " " ) 		# replace tabs with spaces
+		while "  " in filestring: 							# replace doublespaces
+			filestring = filestring.replace( "  ", " " )
+		return filestring
 
-def fileprocess( filestring ):
-	""" deals with a file full of host definitions,
-		turns it to an array full of tuples of name/CIDR """
-	filestring = cleanfile( filestring )
-	lines = filestring.split( "\n" )
-	data = []
-	for line in lines:
-		if( line.strip() != "" ):		# ignore empty lines
-			site, net = line.split()
-			net, mask = net.split( '/' )
-			data.append( ( net.strip(), int( mask ), site.strip() ) )
-	return data
+	def fileprocess( self, filestring ):
+		""" deals with a file full of host definitions,
+			turns it to an array full of tuples of name/CIDR """
+		filestring = self.cleanfile( filestring )
+		lines = filestring.split( "\n" )
+		data = []
+		for line in lines:
+			if( line.strip() != "" ):		# ignore empty lines
+				site, net = line.split()
+				net, mask = net.split( '/' )
+				data.append( ( net.strip(), int( mask ), site.strip() ) )
+		return data
 
-def makecidrs( cleanfile ):
-	""" takes the output from fileprocess() and returns a list of CIDR objects """
-	cidrs = []
-	for entry in cleanfile:
-		net, mask, name = entry
-		cidrs.append( CIDR( "{}/{}".format( net, mask ), name ) )
-	return cidrs
+	def makecidrs( self, cleanfile ):
+		""" takes the output from fileprocess() and returns a list of CIDR objects """
+		cidrs = []
+		for entry in cleanfile:
+			net, mask, name = entry
+			cidrs.append( CIDR( "{}/{}".format( net, mask ), name ) )
+		return cidrs
 
 class CIDR:
 	""" CIDR definition """

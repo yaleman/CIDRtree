@@ -1,5 +1,5 @@
 import nose
-from cidrlib import *
+from cidrlib import CIDR, CIDRfile, CIDRVALIDATE
 
 def test_cidrvalidate():
 	""" Testing the CIDRVALIDATE regex. """
@@ -14,15 +14,22 @@ def test_cidrvalidate():
 
 def test_getfile():
 	""" Testing getfile() """
-	assert getfile( "./testdata/singlevalidCIDR.txt" ) == "10.0.0.0/24"
+	tmp = CIDRfile( "./testdata/singlevalidCIDR.txt" )
+	assert tmp.getfile( "./testdata/singlevalidCIDR.txt" ) == "10.0.0.0/24"
 
 def test_fileprocess():
 	""" Testing fileprocess() """
-	assert fileprocess( "site 	 10.0.0.0/24") == [ ( "10.0.0.0", 24,  "site" ) ]
+	tmp = CIDRfile( "./testdata/singlevalidCIDR.txt" )
+	assert tmp.fileprocess( "site 	 10.0.0.0/24") == [ ( "10.0.0.0", 24,  "site" ) ]
+
+def test_CIDRfile_cleanfile():
+	""" Need to write this test """
+	pass
 
 def test_makecidrs():
 	""" Testing makecidrs() """
-	test1 = makecidrs( [ ("10.0.0.0", 9, "butts" ) ] )
+	tmp = CIDRfile( "./testdata/singlevalidCIDR.txt" )
+	test1 = tmp.makecidrs( [ ("10.0.0.0", 9, "butts" ) ] )
 	test2 = []
 	test2.append( CIDR( "10.0.0.0/9", "butts" ) )
 	assert [ str( t ) for t in test1 ] == [ str( t ) for t in test2 ]
