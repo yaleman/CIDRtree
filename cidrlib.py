@@ -124,5 +124,4 @@ class CIDR:
 			self.children.append( cidrclass ) 					# falls through to adding as a child
 			return True
 		else:
-			#raise TypeError( "Child {} doesn't fit in {}".format( str( cidrclass ), str( self ) ) )
 			return False
