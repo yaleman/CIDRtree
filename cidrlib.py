@@ -69,6 +69,9 @@ class CIDR:
 			self.name = name
 			self.children = []			# store children
 
+			self.binarynetmask = Bits( bin=( "1" * self.mask) + ( ( 32 - self.mask ) * "0" ) ) # binary netmask
+			self.binaryaddress = Bits( uint=self.iptoint( self.address ), length=32 ) # binary version of address
+
 	def __str__( self ):
 		return "{} {}/{}".format( self.name, self.address, self.mask)
 
@@ -93,13 +96,8 @@ class CIDR:
 		intval = ( int( a ) * ( 256 ** 3 ) ) + ( int( b ) * ( 256 ** 2 ) ) + ( int( c ) * 256 ) + int( d )
 		return int( intval )
 
-	def binarynetmask( self ):
-		""" returns a 32-bit binary representation of the netmask """
-		return Bits( bin=( "1" * self.mask) + ( ( 32 - self.mask ) * "0" ) )
 
-	def binaryaddress( self ):
-		""" returns a 32-bit binary representation of the address """
-		return Bits( uint=self.iptoint( self.address ), length=32 )
+
 
 	def haschildren( self ):
 		""" checks if this CIDR has children """
@@ -108,7 +106,7 @@ class CIDR:
 	def cancontain( self, cidrclass ):
 		""" checks if a given CIDR object can be contained within this one """
 		if( cidrclass.getmask() > self.mask ): # smaller mask, that's a start
-			if( ( cidrclass.binaryaddress() & self.binarynetmask() ) == self.binaryaddress() ):
+			if( ( cidrclass.binaryaddress & self.binarynetmask ) == self.binaryaddress ): # do some binary math
 				return True
 		return False
 

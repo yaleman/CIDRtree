@@ -63,8 +63,8 @@ def test_CIDR_iptoint():
 
 def test_CIDR_binary_netmask():
 	""" Testing CIDR binary_netmask """
-	assert CIDR( "1.2.3.4/2", 'test' ).binarynetmask().bin == "11000000000000000000000000000000"
-	assert CIDR( "1.2.3.4/32", 'test' ).binarynetmask().bin == "11111111111111111111111111111111"
+	assert CIDR( "1.2.3.4/2", 'test' ).binarynetmask.bin == "11000000000000000000000000000000"
+	assert CIDR( "1.2.3.4/32", 'test' ).binarynetmask.bin == "11111111111111111111111111111111"
 
 def test_CIDR_cancontain():
 	""" Testing CIDR cancontain """
@@ -79,7 +79,7 @@ def test_CIDR_cancontain():
 def test_CIDR_binary_address():
 	""" Testing CIDR binary_address """
 	tmp = CIDR( "10.0.0.0/8", 'test' )
-	assert tmp.binaryaddress().bin == "00001010000000000000000000000000"
+	assert tmp.binaryaddress.bin == "00001010000000000000000000000000"
 
 def test_CIDR_addchild():
 	""" Testing CIDR addchild """
