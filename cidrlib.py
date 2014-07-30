@@ -19,11 +19,11 @@ def getfile( filename ):
 
 def cleanfile( filestring ):
 	""" cleans not-allowed details, may return a report """
-	# replace tabs with spaces
-	filestring = filestring.replace( "\t", " " )
 	filestring = filestring.replace( "\r\n", "\n" )
-	# replace doublespaces
-	while "  " in filestring:
+
+	#TODO: replace the below with a regex for whitespace
+	filestring = filestring.replace( "\t", " " ) 		# replace tabs with spaces
+	while "  " in filestring: 							# replace doublespaces
 		filestring = filestring.replace( "  ", " " )
 	return filestring
 
